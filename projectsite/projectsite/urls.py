@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from cardquest.views import HomePageView, TrainerList, PokemonList, CollectionList
+from cardquest.views import HomePageView, TrainerList, PokemonList, CollectionList, TrainerCreateView, TrainerUpdateView, TrainerDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +25,7 @@ urlpatterns = [
     path('trainer_list', TrainerList.as_view(), name='trainer-list'),
     path('pokemon_list', PokemonList.as_view(), name='pokemon-list'),
     path('collection_list', CollectionList.as_view(), name='collection-list'),
+    path('trainer_list/add', TrainerCreateView.as_view(), name='trainer-add'),
+    path('trainer_list/<pk>', TrainerUpdateView.as_view(), name='trainer-update'),
+    path('trainer_list/<pk>/delete', TrainerDeleteView.as_view(), name='trainer-delete')
 ]
