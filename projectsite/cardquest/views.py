@@ -3,8 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
-from cardquest.models import PokemonCard, Trainer
-from cardquest.forms import TrainerForm, PokemonCardForm
+from cardquest.models import PokemonCard, Trainer, Collection
+from cardquest.forms import TrainerForm, PokemonCardForm, CollectionForm
 
 from django.urls import reverse_lazy
 
@@ -42,7 +42,7 @@ class PokemonCardList(ListView):
     
     
 class CollectionList(ListView):
-    model = PokemonCard
+    model = Collection
     context_object_name = 'collection'
     template_name = 'collection.html'
     paginate_by = 15
@@ -53,19 +53,19 @@ class CollectionList(ListView):
 class TrainerCreateView(CreateView):
     model = Trainer
     form_class = TrainerForm
-    template_name = 'trainer_add.html'
+    template_name = 'add.html'
     success_url = reverse_lazy('trainer-list')
     
 class TrainerUpdateView(UpdateView):
     model = Trainer
     form_class = TrainerForm
-    template_name = 'trainer_edit.html'
+    template_name = 'edit.html'
     success_url = reverse_lazy('trainer-list')
     
     
 class TrainerDeleteView(DeleteView):
     model = Trainer
-    template_name = 'trainer_del.html'
+    template_name = 'del.html'
     success_url = reverse_lazy('trainer-list')
     
 # POKEMON CARDS
@@ -73,16 +73,38 @@ class TrainerDeleteView(DeleteView):
 class PokemonCardCreateView(CreateView):
     model = PokemonCard
     form_class = PokemonCardForm
-    template_name = 'pokemoncards_add.html'
+    template_name = 'add.html'
     success_url = reverse_lazy('pokemoncard-list')
     
 class PokemonCardUpdateView(UpdateView):
     model = PokemonCard
     form_class = PokemonCardForm
-    template_name = 'pokemoncards_edit.html'
+    template_name = 'edit.html'
     success_url = reverse_lazy('pokemoncard-list')
 
 class PokemonCardDeleteView(DeleteView):
     model = PokemonCard
-    template_name = 'pokemoncards_del.html'
+    template_name = 'del.html'
     success_url = reverse_lazy('pokemoncard-list')
+    
+    
+    
+# COLLECTION
+
+class CollectionCreateView(CreateView):
+    model = Collection
+    form_class = CollectionForm
+    template_name = 'add.html'
+    success_url = reverse_lazy('collection-list')
+    
+class CollectionUpdateView(UpdateView):
+    model = Collection
+    form_class = CollectionForm
+    template_name = 'edit.html'
+    success_url = reverse_lazy('collection-list')
+    
+    
+class CollectionDeleteView(DeleteView):
+    model = Collection
+    template_name = 'del.html'
+    success_url = reverse_lazy('collection-list')
