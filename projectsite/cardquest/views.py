@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from cardquest.models import PokemonCard, Trainer
-from cardquest.forms import TrainerForm
+from cardquest.forms import TrainerForm, PokemonCardForm
 
 from django.urls import reverse_lazy
 
@@ -54,3 +54,21 @@ class TrainerDeleteView(DeleteView):
     model = Trainer
     template_name = 'trainer_del.html'
     success_url = reverse_lazy('trainer-list')
+    
+    
+class PokemonCardCreateView(CreateView):
+    model = PokemonCard
+    form_class = PokemonCardForm
+    template_name = 'pokemon_add.html'
+    success_url = reverse_lazy('pokemon-list')
+    
+class PokemonCardUpdateView(UpdateView):
+    model = PokemonCard
+    form_class = PokemonCardForm
+    template_name = 'pokemon_edit.html'
+    success_url = reverse_lazy('pokemon-list')
+
+class PokemonCardDeleteView(DeleteView):
+    model = PokemonCard
+    template_name = 'pokemon_del.html'
+    success_url = reverse_lazy('pokemon-list')
